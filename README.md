@@ -5,26 +5,30 @@ This is the PyTorch implementation of GCL4SR described in the paper:
 > Yixin Zhang, Yong Liu, Yonghui Xu, Hao Xiong, Chenyi Lei, Wei He, Lizhen Cui, and Chunyan Miao. [Enhancing Sequential Recommendation with Graph Contrastive Learning.](https://arxiv.org/abs/2205.14837) In IJCAI 2022.
 
 # Overview
+
 The sequential recommendation systems capture users' dynamic behavior patterns to predict their next interaction behaviors. Most existing sequential recommendation methods only exploit the local context information of an individual interaction sequence and learn model parameters solely based on the item prediction loss. Thus, they usually fail to learn appropriate sequence representations. This paper proposes a novel recommendation framework, namely Graph Contrastive Learning for Sequential Recommendation (GCL4SR). Specifically, GCL4SR employs a Weighted Item Transition Graph (WITG), built based on interaction sequences of all users, to provide global context information for each interaction and weaken the noise information in the sequence data. Moreover, GCL4SR uses subgraphs of WITG to augment the representation of each interaction sequence. Two auxiliary learning objectives have also been proposed to maximize the consistency between augmented representations induced by the same interaction sequence on WITG, and minimize the difference between the representations augmented by the global context on WITG and the local representation of the original sequence. Extensive experiments on real-world datasets demonstrate that GCL4SR consistently outperforms state-of-the-art sequential recommendation methods.
 
 Figure 2 shows the overall framework of GCL4SR. Observe that GCL4SR has the following main components: 1) graph augmented sequence representation learning, 2) user-specific gating, 3) basic sequence encoder, and 4) prediction layer.
 ![avatar](https://github.com/sdu-zyx/GCL4SR/blob/main/figures/GCL4SR.png)
 
 # Requirement:
+
 This implementation is based on pytorch geometric. To run the code, you will need the following dependencies:
 
 - python 3
-- torch 
-- torch-geometric 
-- tqdm 
-- pickle 
-- scipy 
+- torch
+- torch-geometric
+- tqdm
+- pickle
+- scipy
 
 # Datasets:
 
 ## data format
+
 Taking home dataset as an example
-```shell script
+
+```shell
 home.txt 
 one user per line
 user_1 item_1,item_2,...
@@ -59,28 +63,40 @@ have the same format as train.txt
 ```
 
 ## build weighted item transition graph
+
 Using all observed data(all_train_seq.txt) to build weighted item transition graph, execute:
-```shell script
+
+```shell
     python build_witg.py 
 ```
 
 Figure 1 shows an example about the transition graph without edge weight normalization.
 ![avatar](https://github.com/sdu-zyx/GCL4SR/blob/main/figures/WITG.png)
 
-
 # Usage:
+
 For example, to run GCL4SR under Home dataset, execute:
-```shell script
+
+```shell
     python runner.py --data_name='home'
 ```
 
 You can also change parameters according to the usage, which is also including detailed explanation of each hyper-parameter:
-```shell script
+
+```shell
     python runner.py -h
 ```
 
+添加了一些跨域数据集，Movie-Book（mb）、Food-Kicthen（fk）、Entertainment-Education（ee），使用对应的脚本即可运行。
+
+模型运行会在 `./output`文件夹下的对应文件**追加**运行结果，推荐使用以下命令以单独获取本次运行结果（以fk数据集为例)。`runner.py`负责模型参数的解析。
+
+```shell
+./fk.sh > fk.log
+```
 
 # License
+
 If you find our work useful in your research, please consider citing the paper:
 
 ```
@@ -101,5 +117,6 @@ If you find our work useful in your research, please consider citing the paper:
 ```
 
 # Contact
+
 This implementation is partly based on [S3-Rec](https://github.com/aHuiWang/CIKM2020-S3Rec) modules.
 If you have any questions or concerns, please send an email to yixinzhang@mail.sdu.edu.cn.
