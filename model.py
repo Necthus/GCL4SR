@@ -4,11 +4,12 @@ import torch
 from torch import nn, Tensor
 from torch.autograd import Variable
 from torch.nn.init import xavier_normal_, constant_
-from torch_geometric.data import NeighborSampler
+from torch_geometric.loader import NeighborSampler
 from torch_geometric.nn import SAGEConv, GCNConv
 from torch.nn import Module
 import torch.nn.functional as F
 import numpy as np
+from utils import Timer
 
 
 class GlobalGNN(Module):
@@ -63,6 +64,7 @@ class GCL4SR(nn.Module):
         self.args = args
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
         self.device = torch.device("cuda:{}".format(self.args.gpu_id) if self.cuda_condition else "cpu")
+        # self.global_graph = global_graph.to(self.device)
         self.global_graph = global_graph.to(self.device)
         self.global_gnn = GlobalGNN(args)
 
@@ -198,13 +200,22 @@ class GCL4SR(nn.Module):
                                            num_workers=0, batch_size=items.shape[0])
         g_adjs = []
         s_nodes = []
+        # timer = Timer()
+        # print('Encode begin')
+        # timer.start()
         for (b_size, node_idx, adjs) in subgraph_loaders:
+            
+            # timer.record('Begin Subencode')    
+            
             if type(adjs) == list:
                 g_adjs = [adj.to(items.device) for adj in adjs]
             else:
                 g_adjs = adjs.to(items.device)
             n_idxs = node_idx.to(items.device)
             s_nodes = self.item_embeddings(n_idxs).squeeze()
+        
+        # timer.record('Encode Done')        
+            
         attr = self.global_graph.edge_attr.to(items.device)
         g_hidden = self.global_gnn(s_nodes, g_adjs, attr)
         return g_hidden
@@ -233,7 +244,7 @@ class GCL4SR(nn.Module):
         return mask
 
     def forward(self, data):
-
+        
         user_ids = data[0]
         inputs = data[1]
 
@@ -242,8 +253,11 @@ class GCL4SR(nn.Module):
         seq_mask = 1.0 - seq_mask
 
         seq_hidden_global_a = self.gnn_encode(seq).view(-1, self.args.max_seq_length, self.args.hidden_size)
+        
+        
         seq_hidden_global_b = self.gnn_encode(seq).view(-1, self.args.max_seq_length, self.args.hidden_size)
-
+        
+        
         key_padding_mask = (inputs == 0)
         attn_mask = self.generate_square_subsequent_mask(self.args.max_seq_length).to(inputs.device)
         seq_hidden_local = self.item_embeddings(inputs)
@@ -271,24 +285,30 @@ class GCL4SR(nn.Module):
 
         hidden = torch.cat([sequence_output, user_seq_a, user_seq_b], -1)
         hidden = self.linear_transform(hidden)
+        
 
         return sequence_output, hidden, user_seq_a, user_seq_b, (seq_hidden_global_a, seq_hidden_global_b), seq_mask
 
     def train_stage(self, data):
+
+        
         targets = data[2]
+
         sequence_output, hidden, user_seq_a, user_seq_b, (seq_gnn_a, seq_gnn_b), seq_mask = self.forward(data)
+        
         seq_out = self.final_att_net(seq_mask, hidden)
         seq_out = self.dropout(seq_out)
         test_item_emb = self.item_embeddings.weight[:self.args.item_size]
         logits = torch.matmul(seq_out, test_item_emb.transpose(0, 1))
         main_loss = self.criterion(logits, targets)
-
+        
         sum_a = torch.sum(seq_gnn_a * seq_mask, 1) / torch.sum(seq_mask.float(), 1)
         sum_b = torch.sum(seq_gnn_b * seq_mask, 1) / torch.sum(seq_mask.float(), 1)
 
         info_hidden = torch.cat([sum_a, sum_b], 0)
         gcl_loss = self.GCL_loss(info_hidden, hidden_norm=True, temperature=0.5)
-
+        
+        
         # [B, L, d] to [B, L]️, can reduce training time and memory
         if self.args.fast_run:
             seq_hidden_local = self.w_e(self.item_embeddings(data[1])).squeeze().unsqueeze(0)
@@ -298,6 +318,7 @@ class GCL4SR(nn.Module):
             seq_hidden_local = self.item_embeddings(data[1])
         mmd_loss = self.MMD_loss(seq_hidden_local, user_seq_a) + self.MMD_loss(seq_hidden_local, user_seq_b)
 
+        
         joint_loss = main_loss + self.args.lam1 * gcl_loss + self.args.lam2 * mmd_loss
 
         return joint_loss, main_loss, gcl_loss, mmd_loss

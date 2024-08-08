@@ -1,0 +1,1 @@
+python runner.py --data_name='ee' --gpu_id 3 --data_dir='./datasets/ee/' --batch_size=256 --patience=10 --output_dir='./output2/' --max_seq_length=30

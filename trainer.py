@@ -3,7 +3,7 @@ import numpy as np
 import tqdm
 import torch
 
-from utils import recall_at_k, ndcg_k, get_metric
+from utils import recall_at_k, ndcg_k, get_metric,Timer
 
 
 class Trainer:
@@ -32,6 +32,66 @@ class Trainer:
         return [HIT_1, NDCG_1, HIT_5, NDCG_5, HIT_10, NDCG_10, MRR], str(post_fix)
 
     def get_full_sort_score(self, epoch, answers, pred_list):
+        
+        
+        import math
+        
+        num_users = len(pred_list)
+        
+        assert len(pred_list) == len(answers)
+        
+        
+        metrics = {}
+        metrics['Epoch']=epoch
+        metrics['X'] = {}
+        metrics['Y'] = {}
+        for domain in ['X','Y']:
+            for m in ['MRR','NDCG5','NDCG10','HR1','HR5','HR10','NUM']:
+                metrics[domain][m]=0
+        
+        
+        for i in range(num_users):
+            true_item = answers[i][0]
+            current_pred_list = pred_list[i]
+            if true_item<self.args.x_domain_size:
+                current_domain = 'X'
+                metrics['X']['NUM']+=1
+                new_pred_list = [x for x in current_pred_list if x<self.args.x_domain_size]
+            else:
+                current_domain = 'Y'
+                metrics['Y']['NUM']+=1
+                new_pred_list = [y for y in current_pred_list if y>=self.args.x_domain_size]
+                
+            if true_item in new_pred_list:
+                first_appear = new_pred_list.index(true_item)+1
+                metrics[current_domain]['MRR']+=1/first_appear
+            
+            if true_item in new_pred_list[:1]:
+                metrics[current_domain]['HR1']+=1
+                
+            if true_item in new_pred_list[:5]:
+                metrics[current_domain]['HR5']+=1
+                first_appear = new_pred_list.index(true_item)+1
+                metrics[current_domain]['NDCG5']+=1/math.log(first_appear+1)
+                
+            if true_item in new_pred_list[:10]:
+                metrics[current_domain]['HR10']+=1
+                first_appear = new_pred_list.index(true_item)+1
+                metrics[current_domain]['NDCG10']+=1/math.log(first_appear+1)
+                
+        for domain in ['X','Y']:
+            for m in ['MRR','NDCG5','NDCG10','HR1','HR5','HR10']:
+                metrics[domain][m]/=metrics[domain]['NUM']
+                metrics[domain][m]=round(metrics[domain][m],4)
+        
+        
+        
+        print(metrics)
+        with open(self.args.log_file, 'a') as f:
+            f.write(str(metrics) + '\n')    
+        
+        return [(metrics['X']['HR10']+metrics['Y']['HR10'])/2],str(metrics)        
+        
         recall, ndcg = [], []
         for k in [5, 10, 15, 20]:
             recall.append(recall_at_k(answers, pred_list, k))
@@ -78,6 +138,8 @@ class GCL4SR_Train(Trainer):
 
     def train_stage(self, epoch, train_dataloader):
 
+        
+        
         desc = f'n_sample-{self.args.sample_size}-' \
                f'hidden_size-{self.args.hidden_size}'
 
@@ -94,18 +156,31 @@ class GCL4SR_Train(Trainer):
 
         for i, batch in train_data_iter:
             # 0. batch_data will be sent into the device(GPU or CPU)
+            
+            # print(i,'Step begin')
+            # timer.start()
+            
+            
             batch = tuple(t.to(self.model.device) for t in batch)
-
+            # timer.record('Batch prepared')
+            
             joint_loss, main_loss, cl_loss, mmd_loss = self.model.train_stage(batch)
+            # timer.record('Forward Done')
 
             self.model.optimizer.zero_grad()
             joint_loss.backward()
+            # timer.record('Backward Done')
+            
             self.model.optimizer.step()
+            # timer.record('Optimize Done')
 
             joint_loss_avg += joint_loss.item()
             main_loss_avg += main_loss.item()
             cl_loss_avg += cl_loss.item()
             mmd_loss_avg += mmd_loss.item()
+            
+            # timer.record('Step Done')
+            
         self.model.scheduler.step()
         post_fix = {
             "epoch": epoch,

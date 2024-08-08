@@ -116,15 +116,19 @@ def get_matrix_and_num(data_file):
     lines = open(data_file).readlines()
     user_seq = []
     item_set = set()
+    user_set = set()
     for line in lines:
         user, items = line.strip().split(' ', 1)
+        user = int(user)
+        user_set.add(user)
         items = items.split(',')
         items = [int(item) for item in items]
         user_seq.append(items)
         item_set = item_set | set(items)
     max_item = max(item_set)
+    max_user = max(user_set)
 
-    num_users = len(lines)
+    num_users = max_user + 1
     num_items = max_item + 1
 
     valid_rating_matrix = generate_rating_matrix_valid(user_seq, num_users, num_items)
@@ -172,3 +176,23 @@ def idcg_k(k):
         return 1.0
     else:
         return res
+    
+    
+import time,datetime
+
+class Timer:
+    def __init__(self):
+        self.start_time = None
+
+    def start(self):
+
+        self.start_time = time.time()
+        print('Timer running at',str(datetime.datetime.fromtimestamp(self.start_time)),flush=True)
+        return self.start_time
+
+
+    def record(self,msg):
+        current_time = time.time()
+        dt = current_time-self.start_time
+        print(msg,'already running',dt,flush=True)
+        return current_time,dt

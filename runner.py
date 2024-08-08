@@ -7,7 +7,7 @@ import argparse
 import os
 import pickle
 
-from GCL4SR.datasets.build_witg import build_WITG_from_trainset
+from datasets.build_witg import build_WITG_from_trainset
 from dataset import GCL4SRData
 from trainer import GCL4SR_Train
 from model import GCL4SR
@@ -23,7 +23,7 @@ def main():
     parser.add_argument("--output_dir", default='output/', type=str)
     parser.add_argument("--do_eval", action='store_true')
     parser.add_argument("--no_cuda", action="store_true")
-    parser.add_argument("--gpu_id", type=str, default="0", help="gpu_id")
+    parser.add_argument("--gpu_id", type=str, default="3", help="gpu_id")
 
     # optimizer
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate of adam")
@@ -55,7 +55,9 @@ def main():
     parser.add_argument("--use_renorm", type=bool, default=True, help="use re-normalize when build witg")
     parser.add_argument("--use_scale", type=bool, default=False, help="use scale when build witg")
     parser.add_argument("--fast_run", type=bool, default=True, help="can reduce training time and memory")
-    parser.add_argument("--sample_size", default=[20, 20], type=list, help='gnn sample')
+    # parser.add_argument("--sample_size", default=[30, 30], type=list, help='gnn sample')
+    parser.add_argument("--sample_depth", default=2, type=int, help='gnn sample depth')
+    parser.add_argument("--sample_width", default=20, type=int, help='gnn sample width')
     parser.add_argument("--lam1", type=float, default=1, help="loss lambda 1")
     parser.add_argument("--lam2", type=float, default=0.1, help="loss lambda 2")
 
@@ -65,6 +67,8 @@ def main():
     check_path(args.output_dir)
 
     args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
+    
+    args.sample_size = [args.sample_width]*args.sample_depth
 
     args.data_file = args.data_dir + args.data_name + '.txt'
     user_num, item_num, valid_rating_matrix, test_rating_matrix = \
@@ -73,6 +77,13 @@ def main():
     train_data = pickle.load(open(args.data_dir + 'train.pkl', 'rb'))
     valid_data = pickle.load(open(args.data_dir + 'valid.pkl', 'rb'))
     test_data = pickle.load(open(args.data_dir + 'test.pkl', 'rb'))
+    
+    
+    with open(args.data_dir + 'Alist.txt') as f:
+        lines  =  f.readlines()
+        args.x_domain_size = len(lines)+1
+    
+    
 
     args.item_size = item_num
     args.user_size = user_num
@@ -99,7 +110,7 @@ def main():
 
     train_dataset = GCL4SRData(args, train_data)
     train_sampler = RandomSampler(train_dataset)
-    train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.batch_size, pin_memory=True, num_workers=8)
+    train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.batch_size, pin_memory=True, num_workers=16)
 
     eval_dataset = GCL4SRData(args, valid_data)
     eval_sampler = SequentialSampler(eval_dataset)
