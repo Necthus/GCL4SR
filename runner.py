@@ -60,6 +60,9 @@ def main():
     parser.add_argument("--sample_width", default=20, type=int, help='gnn sample width')
     parser.add_argument("--lam1", type=float, default=1, help="loss lambda 1")
     parser.add_argument("--lam2", type=float, default=0.1, help="loss lambda 2")
+    
+    parser.add_argument("--eval_size", type=int, default=1000, help="evaluation sample size (gt+neg)")
+    
 
     args = parser.parse_args()
 
@@ -83,13 +86,13 @@ def main():
         lines  =  f.readlines()
         args.x_domain_size = len(lines)+1
     
-    
 
     args.item_size = item_num
     args.user_size = user_num
 
     # save model args
-    args_str = f'{args.model_name}-{args.data_name}-{args.sample_size}'
+    args_str = f'{args.model_name}-{args.data_name}-{args.sample_size}-{args.hidden_size}-{args.max_seq_length}'
+    
     args.log_file = os.path.join(args.output_dir, args_str + '.txt')
     print(args)
     with open(args.log_file, 'a') as f:

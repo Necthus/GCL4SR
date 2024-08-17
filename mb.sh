@@ -1,1 +1,1 @@
-python runner.py --data_name='mb' --gpu_id 3 --data_dir='./datasets/mb/' --batch_size=256 --patience=10 --max_seq_length=15 
+python runner.py --data_name='mb' --gpu_id 3 --data_dir='./datasets/mb/' --batch_size=256 --patience=10 --max_seq_length=15 --do_eval

@@ -31,6 +31,88 @@ class Trainer:
             f.write(str(post_fix) + '\n')
         return [HIT_1, NDCG_1, HIT_5, NDCG_5, HIT_10, NDCG_10, MRR], str(post_fix)
 
+    
+    def get_sample_score(self, epoch, answers, pred_list):
+        
+        
+        import math
+        
+        num_users = len(pred_list)
+        
+        assert len(pred_list) == len(answers)
+        
+        
+        metrics = {}
+        metrics['Epoch']=epoch
+        metrics['X'] = {}
+        metrics['Y'] = {}
+        for domain in ['X','Y']:
+            for m in ['MRR','NDCG5','NDCG10','HR1','HR5','HR10','NUM']:
+                metrics[domain][m]=0
+        
+        
+        for i in range(num_users):
+            
+            # if i % 100 == 0:
+            #     print(i,flush=True)
+            
+        
+            
+            true_item = answers[i][0]
+            current_pred_list = pred_list[i]
+            if true_item<self.args.x_domain_size:
+                current_domain = 'X'
+                metrics['X']['NUM']+=1
+                new_pred_list = np.array([x for x in current_pred_list if x<self.args.x_domain_size])
+            else:
+                current_domain = 'Y'
+                metrics['Y']['NUM']+=1
+                new_pred_list = np.array([y for y in current_pred_list if y>=self.args.x_domain_size])
+                
+            gt_pos = np.argwhere(new_pred_list==true_item)[0][0]
+            # print(gt_pos)
+            slices = np.random.choice(len(new_pred_list),self.args.eval_size,replace=False)
+            # print(new_pred_list.shape)
+            if gt_pos not in slices:
+                slices[-1]=gt_pos
+
+            sorted_slices = np.sort(slices)
+            new_pred_list = new_pred_list[sorted_slices]    
+                
+            new_pred_list = list(new_pred_list)
+            
+                
+            if true_item in new_pred_list:
+                first_appear = new_pred_list.index(true_item)+1
+                metrics[current_domain]['MRR']+=1/first_appear
+            
+            if true_item in new_pred_list[:1]:
+                metrics[current_domain]['HR1']+=1
+                
+            if true_item in new_pred_list[:5]:
+                metrics[current_domain]['HR5']+=1
+                first_appear = new_pred_list.index(true_item)+1
+                metrics[current_domain]['NDCG5']+=1/math.log(first_appear+1,2)
+                
+            if true_item in new_pred_list[:10]:
+                metrics[current_domain]['HR10']+=1
+                first_appear = new_pred_list.index(true_item)+1
+                metrics[current_domain]['NDCG10']+=1/math.log(first_appear+1,2)
+                
+        for domain in ['X','Y']:
+            for m in ['MRR','NDCG5','NDCG10','HR1','HR5','HR10']:
+                metrics[domain][m]/=metrics[domain]['NUM']
+                metrics[domain][m]=round(metrics[domain][m],4)
+        
+        
+        
+        print(metrics)
+        with open(self.args.log_file, 'a') as f:
+            f.write(str(metrics) + '\n')    
+        
+        return [(metrics['X']['HR10']+metrics['Y']['HR10'])/2],str(metrics)     
+    
+    
     def get_full_sort_score(self, epoch, answers, pred_list):
         
         
@@ -216,17 +298,21 @@ class GCL4SR_Train(Trainer):
                 answers = batch[2]
                 recommend_output = self.model.eval_stage(batch)
                 answers = answers.view(-1, 1)
-
+                
                 # 推荐的结果
                 rating_pred = self.predict_full(recommend_output)
-
+                
                 rating_pred = rating_pred.cpu().data.numpy().copy()
                 batch_user_index = user_ids.cpu().numpy()
                 rating_pred[self.args.train_matrix[batch_user_index].toarray() > 0] = 0
+                
                 # reference: https://stackoverflow.com/a/23734295, https://stackoverflow.com/a/20104162
                 # argpartition 时间复杂度O(n)  argsort O(nlogn) 只会做
                 # 加负号"-"表示取大的值
-                ind = np.argpartition(rating_pred, -20)[:, -20:]
+                
+                n = self.args.item_size
+                
+                ind = np.argpartition(rating_pred, -n)[:, -n:]
                 # 根据返回的下标 从对应维度分别取对应的值 得到每行topk的子表
                 arr_ind = rating_pred[np.arange(len(rating_pred))[:, None], ind]
                 # 对子表进行排序 得到从大到小的顺序
@@ -240,7 +326,7 @@ class GCL4SR_Train(Trainer):
                 else:
                     pred_list = np.append(pred_list, batch_pred_list, axis=0)
                     answer_list = np.append(answer_list, answers.cpu().data.numpy(), axis=0)
-            return self.get_full_sort_score(epoch, answer_list, pred_list)
+            return self.get_sample_score(epoch, answer_list, pred_list)
 
         else:
             for i, batch in rec_data_iter:

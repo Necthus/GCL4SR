@@ -1,1 +1,1 @@
-python runner.py --data_name='fk' --gpu_id 3 --data_dir='./datasets/fk/' --batch_size=1024 --patience=10 --max_seq_length=15 --lr=1e-3 --hidden_size=64 --sample_depth=2 --sample_width=20
+python runner.py --data_name='fk' --gpu_id 3 --data_dir='./datasets/fk/' --batch_size=1024 --patience=10 --max_seq_length=15 --lr=1e-3 --hidden_size=256 --sample_depth=2 --sample_width=20 --do_eval

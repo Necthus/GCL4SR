@@ -92,7 +92,7 @@ You can also change parameters according to the usage, which is also including d
 模型运行会在 `./output`文件夹下的对应文件**追加**运行结果，推荐使用以下命令以单独获取本次运行结果（以fk数据集为例)。`runner.py`负责模型参数的解析。
 
 ```shell
-./fk.sh > fk.log
+./fk.sh > ./fk.log
 ```
 
 # License

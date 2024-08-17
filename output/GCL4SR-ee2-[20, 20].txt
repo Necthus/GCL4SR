@@ -1,0 +1,123 @@
+2024-08-15 21:21:55
+Namespace(model_name='GCL4SR', data_name='ee2', data_dir='./datasets/ee2/', output_dir='output/', do_eval=False, no_cuda=False, gpu_id='3', lr=0.001, lr_dc=0.7, lr_dc_step=5, weight_decay=5e-05, adam_beta1=0.9, adam_beta2=0.999, num_hidden_layers=2, num_attention_heads=2, hidden_act='gelu', attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, epochs=200, batch_size=1024, max_seq_length=30, hidden_size=64, seed=2022, log_freq=1, patience=4, gnn_dropout_prob=0.5, use_renorm=True, use_scale=False, fast_run=True, sample_depth=2, sample_width=20, lam1=1, lam2=0.1, eval_size=1000, cuda_condition=True, sample_size=[20, 20], data_file='./datasets/ee2/ee2.txt', x_domain_size=8368, item_size=19772, user_size=13714, log_file='output/GCL4SR-ee2-[20, 20].txt')
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 0, 'joint_loss_avg': '21.7054', 'main_loss_avg': '7.9757', 'gcl_loss_avg': '13.7051', 'mmd_loss_avg': '0.2460'}
+{'Epoch': 0, 'X': {'MRR': 0.153, 'NDCG5': 0.2141, 'NDCG10': 0.2537, 'HR1': 0.0754, 'HR5': 0.2186, 'HR10': 0.3039, 'NUM': 4524}, 'Y': {'MRR': 0.1847, 'NDCG5': 0.2643, 'NDCG10': 0.2912, 'HR1': 0.094, 'HR5': 0.2646, 'HR10': 0.3224, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 1, 'joint_loss_avg': '18.7813', 'main_loss_avg': '7.1509', 'gcl_loss_avg': '11.6291', 'mmd_loss_avg': '0.0131'}
+{'Epoch': 1, 'X': {'MRR': 0.1852, 'NDCG5': 0.267, 'NDCG10': 0.3024, 'HR1': 0.1021, 'HR5': 0.2608, 'HR10': 0.3371, 'NUM': 4524}, 'Y': {'MRR': 0.2216, 'NDCG5': 0.3133, 'NDCG10': 0.3416, 'HR1': 0.1389, 'HR5': 0.2908, 'HR10': 0.3515, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 2, 'joint_loss_avg': '18.3177', 'main_loss_avg': '6.7692', 'gcl_loss_avg': '11.5472', 'mmd_loss_avg': '0.0127'}
+{'Epoch': 2, 'X': {'MRR': 0.2076, 'NDCG5': 0.3014, 'NDCG10': 0.3403, 'HR1': 0.1209, 'HR5': 0.2902, 'HR10': 0.3736, 'NUM': 4524}, 'Y': {'MRR': 0.2548, 'NDCG5': 0.3647, 'NDCG10': 0.3973, 'HR1': 0.1643, 'HR5': 0.3303, 'HR10': 0.4006, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 3, 'joint_loss_avg': '17.9820', 'main_loss_avg': '6.4596', 'gcl_loss_avg': '11.5212', 'mmd_loss_avg': '0.0124'}
+{'Epoch': 3, 'X': {'MRR': 0.2199, 'NDCG5': 0.3213, 'NDCG10': 0.3641, 'HR1': 0.1286, 'HR5': 0.3084, 'HR10': 0.4001, 'NUM': 4524}, 'Y': {'MRR': 0.2645, 'NDCG5': 0.3847, 'NDCG10': 0.4154, 'HR1': 0.1701, 'HR5': 0.3527, 'HR10': 0.4185, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 4, 'joint_loss_avg': '17.7328', 'main_loss_avg': '6.2268', 'gcl_loss_avg': '11.5047', 'mmd_loss_avg': '0.0130'}
+{'Epoch': 4, 'X': {'MRR': 0.233, 'NDCG5': 0.3415, 'NDCG10': 0.3809, 'HR1': 0.1437, 'HR5': 0.3225, 'HR10': 0.4067, 'NUM': 4524}, 'Y': {'MRR': 0.2845, 'NDCG5': 0.4137, 'NDCG10': 0.4428, 'HR1': 0.1947, 'HR5': 0.369, 'HR10': 0.4314, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 5, 'joint_loss_avg': '17.5367', 'main_loss_avg': '6.0455', 'gcl_loss_avg': '11.4899', 'mmd_loss_avg': '0.0124'}
+{'Epoch': 5, 'X': {'MRR': 0.2393, 'NDCG5': 0.3536, 'NDCG10': 0.3936, 'HR1': 0.1477, 'HR5': 0.3351, 'HR10': 0.4209, 'NUM': 4524}, 'Y': {'MRR': 0.2855, 'NDCG5': 0.4165, 'NDCG10': 0.449, 'HR1': 0.1943, 'HR5': 0.374, 'HR10': 0.443, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 6, 'joint_loss_avg': '17.4287', 'main_loss_avg': '5.9404', 'gcl_loss_avg': '11.4870', 'mmd_loss_avg': '0.0126'}
+{'Epoch': 6, 'X': {'MRR': 0.2442, 'NDCG5': 0.3621, 'NDCG10': 0.401, 'HR1': 0.1492, 'HR5': 0.3428, 'HR10': 0.4262, 'NUM': 4524}, 'Y': {'MRR': 0.2969, 'NDCG5': 0.4366, 'NDCG10': 0.4638, 'HR1': 0.2042, 'HR5': 0.3902, 'HR10': 0.4476, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 7, 'joint_loss_avg': '17.3268', 'main_loss_avg': '5.8450', 'gcl_loss_avg': '11.4806', 'mmd_loss_avg': '0.0123'}
+{'Epoch': 7, 'X': {'MRR': 0.2484, 'NDCG5': 0.3709, 'NDCG10': 0.4095, 'HR1': 0.1534, 'HR5': 0.3534, 'HR10': 0.4359, 'NUM': 4524}, 'Y': {'MRR': 0.298, 'NDCG5': 0.4399, 'NDCG10': 0.4672, 'HR1': 0.2051, 'HR5': 0.3939, 'HR10': 0.4526, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 8, 'joint_loss_avg': '17.2358', 'main_loss_avg': '5.7565', 'gcl_loss_avg': '11.4781', 'mmd_loss_avg': '0.0121'}
+{'Epoch': 8, 'X': {'MRR': 0.2526, 'NDCG5': 0.3753, 'NDCG10': 0.4158, 'HR1': 0.1561, 'HR5': 0.3537, 'HR10': 0.4399, 'NUM': 4524}, 'Y': {'MRR': 0.3001, 'NDCG5': 0.4404, 'NDCG10': 0.4704, 'HR1': 0.2055, 'HR5': 0.3902, 'HR10': 0.4542, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 9, 'joint_loss_avg': '17.1638', 'main_loss_avg': '5.6872', 'gcl_loss_avg': '11.4754', 'mmd_loss_avg': '0.0121'}
+{'Epoch': 9, 'X': {'MRR': 0.256, 'NDCG5': 0.3822, 'NDCG10': 0.4205, 'HR1': 0.1607, 'HR5': 0.3607, 'HR10': 0.4427, 'NUM': 4524}, 'Y': {'MRR': 0.3028, 'NDCG5': 0.4457, 'NDCG10': 0.476, 'HR1': 0.2126, 'HR5': 0.396, 'HR10': 0.4605, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 10, 'joint_loss_avg': '17.0782', 'main_loss_avg': '5.6077', 'gcl_loss_avg': '11.4694', 'mmd_loss_avg': '0.0118'}
+{'Epoch': 10, 'X': {'MRR': 0.2629, 'NDCG5': 0.3927, 'NDCG10': 0.4328, 'HR1': 0.1682, 'HR5': 0.3683, 'HR10': 0.454, 'NUM': 4524}, 'Y': {'MRR': 0.3064, 'NDCG5': 0.4536, 'NDCG10': 0.4801, 'HR1': 0.2151, 'HR5': 0.4031, 'HR10': 0.4597, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 11, 'joint_loss_avg': '17.0252', 'main_loss_avg': '5.5553', 'gcl_loss_avg': '11.4687', 'mmd_loss_avg': '0.0118'}
+{'Epoch': 11, 'X': {'MRR': 0.2633, 'NDCG5': 0.392, 'NDCG10': 0.4328, 'HR1': 0.168, 'HR5': 0.3663, 'HR10': 0.4531, 'NUM': 4524}, 'Y': {'MRR': 0.3091, 'NDCG5': 0.4523, 'NDCG10': 0.4833, 'HR1': 0.2188, 'HR5': 0.3948, 'HR10': 0.4605, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 12, 'joint_loss_avg': '16.9888', 'main_loss_avg': '5.5198', 'gcl_loss_avg': '11.4679', 'mmd_loss_avg': '0.0113'}
+{'Epoch': 12, 'X': {'MRR': 0.2667, 'NDCG5': 0.3968, 'NDCG10': 0.4376, 'HR1': 0.1713, 'HR5': 0.3685, 'HR10': 0.4558, 'NUM': 4524}, 'Y': {'MRR': 0.3083, 'NDCG5': 0.4545, 'NDCG10': 0.4837, 'HR1': 0.2163, 'HR5': 0.4006, 'HR10': 0.463, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 13, 'joint_loss_avg': '16.9519', 'main_loss_avg': '5.4850', 'gcl_loss_avg': '11.4657', 'mmd_loss_avg': '0.0114'}
+{'Epoch': 13, 'X': {'MRR': 0.2707, 'NDCG5': 0.4028, 'NDCG10': 0.4427, 'HR1': 0.1777, 'HR5': 0.372, 'HR10': 0.4573, 'NUM': 4524}, 'Y': {'MRR': 0.3087, 'NDCG5': 0.4569, 'NDCG10': 0.4852, 'HR1': 0.2167, 'HR5': 0.4047, 'HR10': 0.4651, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 14, 'joint_loss_avg': '16.9139', 'main_loss_avg': '5.4471', 'gcl_loss_avg': '11.4657', 'mmd_loss_avg': '0.0107'}
+{'Epoch': 14, 'X': {'MRR': 0.2725, 'NDCG5': 0.4048, 'NDCG10': 0.445, 'HR1': 0.1797, 'HR5': 0.3729, 'HR10': 0.4582, 'NUM': 4524}, 'Y': {'MRR': 0.313, 'NDCG5': 0.4614, 'NDCG10': 0.4905, 'HR1': 0.223, 'HR5': 0.4043, 'HR10': 0.4667, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 15, 'joint_loss_avg': '16.8592', 'main_loss_avg': '5.3958', 'gcl_loss_avg': '11.4623', 'mmd_loss_avg': '0.0110'}
+{'Epoch': 15, 'X': {'MRR': 0.2742, 'NDCG5': 0.4102, 'NDCG10': 0.4483, 'HR1': 0.1773, 'HR5': 0.3793, 'HR10': 0.4611, 'NUM': 4524}, 'Y': {'MRR': 0.3168, 'NDCG5': 0.4672, 'NDCG10': 0.4964, 'HR1': 0.2275, 'HR5': 0.4068, 'HR10': 0.4696, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 16, 'joint_loss_avg': '16.8329', 'main_loss_avg': '5.3703', 'gcl_loss_avg': '11.4616', 'mmd_loss_avg': '0.0106'}
+{'Epoch': 16, 'X': {'MRR': 0.2747, 'NDCG5': 0.4112, 'NDCG10': 0.4482, 'HR1': 0.1793, 'HR5': 0.3806, 'HR10': 0.4595, 'NUM': 4524}, 'Y': {'MRR': 0.3194, 'NDCG5': 0.4718, 'NDCG10': 0.4977, 'HR1': 0.2338, 'HR5': 0.4101, 'HR10': 0.4651, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 17, 'joint_loss_avg': '16.8097', 'main_loss_avg': '5.3464', 'gcl_loss_avg': '11.4622', 'mmd_loss_avg': '0.0106'}
+{'Epoch': 17, 'X': {'MRR': 0.2758, 'NDCG5': 0.4107, 'NDCG10': 0.4511, 'HR1': 0.1815, 'HR5': 0.3782, 'HR10': 0.464, 'NUM': 4524}, 'Y': {'MRR': 0.321, 'NDCG5': 0.4724, 'NDCG10': 0.5023, 'HR1': 0.2329, 'HR5': 0.4089, 'HR10': 0.4721, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 18, 'joint_loss_avg': '16.7847', 'main_loss_avg': '5.3241', 'gcl_loss_avg': '11.4595', 'mmd_loss_avg': '0.0105'}
+{'Epoch': 18, 'X': {'MRR': 0.2797, 'NDCG5': 0.4196, 'NDCG10': 0.4557, 'HR1': 0.1835, 'HR5': 0.3873, 'HR10': 0.4644, 'NUM': 4524}, 'Y': {'MRR': 0.3198, 'NDCG5': 0.4718, 'NDCG10': 0.5002, 'HR1': 0.2321, 'HR5': 0.4093, 'HR10': 0.4696, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 19, 'joint_loss_avg': '16.7571', 'main_loss_avg': '5.2974', 'gcl_loss_avg': '11.4587', 'mmd_loss_avg': '0.0099'}
+{'Epoch': 19, 'X': {'MRR': 0.2793, 'NDCG5': 0.419, 'NDCG10': 0.456, 'HR1': 0.1852, 'HR5': 0.3866, 'HR10': 0.466, 'NUM': 4524}, 'Y': {'MRR': 0.3185, 'NDCG5': 0.4726, 'NDCG10': 0.5005, 'HR1': 0.2296, 'HR5': 0.4139, 'HR10': 0.4734, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 20, 'joint_loss_avg': '16.7282', 'main_loss_avg': '5.2688', 'gcl_loss_avg': '11.4584', 'mmd_loss_avg': '0.0099'}
+{'Epoch': 20, 'X': {'MRR': 0.2833, 'NDCG5': 0.4233, 'NDCG10': 0.4612, 'HR1': 0.1897, 'HR5': 0.3873, 'HR10': 0.4677, 'NUM': 4524}, 'Y': {'MRR': 0.3203, 'NDCG5': 0.4727, 'NDCG10': 0.5016, 'HR1': 0.2342, 'HR5': 0.4097, 'HR10': 0.4713, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 21, 'joint_loss_avg': '16.7068', 'main_loss_avg': '5.2493', 'gcl_loss_avg': '11.4566', 'mmd_loss_avg': '0.0096'}
+{'Epoch': 21, 'X': {'MRR': 0.2849, 'NDCG5': 0.4248, 'NDCG10': 0.4617, 'HR1': 0.1899, 'HR5': 0.3864, 'HR10': 0.4649, 'NUM': 4524}, 'Y': {'MRR': 0.3233, 'NDCG5': 0.4796, 'NDCG10': 0.505, 'HR1': 0.2388, 'HR5': 0.4168, 'HR10': 0.4709, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 22, 'joint_loss_avg': '16.6914', 'main_loss_avg': '5.2344', 'gcl_loss_avg': '11.4561', 'mmd_loss_avg': '0.0096'}
+{'Epoch': 22, 'X': {'MRR': 0.2811, 'NDCG5': 0.4213, 'NDCG10': 0.4593, 'HR1': 0.1835, 'HR5': 0.3873, 'HR10': 0.4684, 'NUM': 4524}, 'Y': {'MRR': 0.3229, 'NDCG5': 0.4774, 'NDCG10': 0.5052, 'HR1': 0.2371, 'HR5': 0.4126, 'HR10': 0.4721, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 23, 'joint_loss_avg': '16.6772', 'main_loss_avg': '5.2197', 'gcl_loss_avg': '11.4565', 'mmd_loss_avg': '0.0095'}
+{'Epoch': 23, 'X': {'MRR': 0.2869, 'NDCG5': 0.4286, 'NDCG10': 0.4663, 'HR1': 0.1919, 'HR5': 0.3904, 'HR10': 0.4706, 'NUM': 4524}, 'Y': {'MRR': 0.3206, 'NDCG5': 0.475, 'NDCG10': 0.5037, 'HR1': 0.2321, 'HR5': 0.4135, 'HR10': 0.4746, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 24, 'joint_loss_avg': '16.6657', 'main_loss_avg': '5.2080', 'gcl_loss_avg': '11.4567', 'mmd_loss_avg': '0.0094'}
+{'Epoch': 24, 'X': {'MRR': 0.2873, 'NDCG5': 0.427, 'NDCG10': 0.4655, 'HR1': 0.1965, 'HR5': 0.3859, 'HR10': 0.4677, 'NUM': 4524}, 'Y': {'MRR': 0.3203, 'NDCG5': 0.4742, 'NDCG10': 0.5018, 'HR1': 0.2321, 'HR5': 0.4114, 'HR10': 0.4705, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 25, 'joint_loss_avg': '16.6420', 'main_loss_avg': '5.1866', 'gcl_loss_avg': '11.4545', 'mmd_loss_avg': '0.0090'}
+{'Epoch': 25, 'X': {'MRR': 0.2856, 'NDCG5': 0.4268, 'NDCG10': 0.4642, 'HR1': 0.1916, 'HR5': 0.3895, 'HR10': 0.4688, 'NUM': 4524}, 'Y': {'MRR': 0.3212, 'NDCG5': 0.4798, 'NDCG10': 0.5035, 'HR1': 0.2321, 'HR5': 0.4205, 'HR10': 0.4713, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 26, 'joint_loss_avg': '16.6198', 'main_loss_avg': '5.1644', 'gcl_loss_avg': '11.4545', 'mmd_loss_avg': '0.0091'}
+{'Epoch': 26, 'X': {'MRR': 0.2861, 'NDCG5': 0.4288, 'NDCG10': 0.4646, 'HR1': 0.193, 'HR5': 0.3919, 'HR10': 0.4679, 'NUM': 4524}, 'Y': {'MRR': 0.3216, 'NDCG5': 0.4761, 'NDCG10': 0.5024, 'HR1': 0.2359, 'HR5': 0.4114, 'HR10': 0.4671, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 27, 'joint_loss_avg': '16.6191', 'main_loss_avg': '5.1634', 'gcl_loss_avg': '11.4548', 'mmd_loss_avg': '0.0090'}
+{'Epoch': 27, 'X': {'MRR': 0.2874, 'NDCG5': 0.4295, 'NDCG10': 0.4688, 'HR1': 0.1941, 'HR5': 0.391, 'HR10': 0.4755, 'NUM': 4524}, 'Y': {'MRR': 0.3216, 'NDCG5': 0.4736, 'NDCG10': 0.5043, 'HR1': 0.235, 'HR5': 0.4064, 'HR10': 0.4725, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 28, 'joint_loss_avg': '16.6060', 'main_loss_avg': '5.1520', 'gcl_loss_avg': '11.4531', 'mmd_loss_avg': '0.0090'}
+{'Epoch': 28, 'X': {'MRR': 0.2882, 'NDCG5': 0.4303, 'NDCG10': 0.4695, 'HR1': 0.195, 'HR5': 0.3915, 'HR10': 0.475, 'NUM': 4524}, 'Y': {'MRR': 0.32, 'NDCG5': 0.4722, 'NDCG10': 0.5025, 'HR1': 0.2338, 'HR5': 0.4089, 'HR10': 0.473, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 29, 'joint_loss_avg': '16.5961', 'main_loss_avg': '5.1421', 'gcl_loss_avg': '11.4532', 'mmd_loss_avg': '0.0088'}
+{'Epoch': 29, 'X': {'MRR': 0.2922, 'NDCG5': 0.4366, 'NDCG10': 0.4724, 'HR1': 0.1987, 'HR5': 0.3948, 'HR10': 0.4713, 'NUM': 4524}, 'Y': {'MRR': 0.3232, 'NDCG5': 0.4785, 'NDCG10': 0.5054, 'HR1': 0.2371, 'HR5': 0.4135, 'HR10': 0.4705, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 30, 'joint_loss_avg': '16.5754', 'main_loss_avg': '5.1226', 'gcl_loss_avg': '11.4519', 'mmd_loss_avg': '0.0087'}
+{'Epoch': 30, 'X': {'MRR': 0.2866, 'NDCG5': 0.4313, 'NDCG10': 0.4653, 'HR1': 0.1934, 'HR5': 0.3957, 'HR10': 0.4684, 'NUM': 4524}, 'Y': {'MRR': 0.3227, 'NDCG5': 0.4777, 'NDCG10': 0.5028, 'HR1': 0.2384, 'HR5': 0.4118, 'HR10': 0.4651, 'NUM': 2404}}
+n_sample-[20, 20]-hidden_size-64
+{'epoch': 31, 'joint_loss_avg': '16.5666', 'main_loss_avg': '5.1148', 'gcl_loss_avg': '11.4510', 'mmd_loss_avg': '0.0086'}
+{'Epoch': 31, 'X': {'MRR': 0.29, 'NDCG5': 0.4348, 'NDCG10': 0.4694, 'HR1': 0.1972, 'HR5': 0.3954, 'HR10': 0.4695, 'NUM': 4524}, 'Y': {'MRR': 0.3241, 'NDCG5': 0.4787, 'NDCG10': 0.5062, 'HR1': 0.2404, 'HR5': 0.4118, 'HR10': 0.4705, 'NUM': 2404}}
+{'Epoch': 0, 'X': {'MRR': 0.3006, 'NDCG5': 0.4485, 'NDCG10': 0.4839, 'HR1': 0.2089, 'HR5': 0.4009, 'HR10': 0.4774, 'NUM': 4485}, 'Y': {'MRR': 0.3311, 'NDCG5': 0.4888, 'NDCG10': 0.5127, 'HR1': 0.253, 'HR5': 0.4161, 'HR10': 0.467, 'NUM': 2300}}
+GCL4SR-ee2-[20, 20]
+{'Epoch': 0, 'X': {'MRR': 0.3006, 'NDCG5': 0.4485, 'NDCG10': 0.4839, 'HR1': 0.2089, 'HR5': 0.4009, 'HR10': 0.4774, 'NUM': 4485}, 'Y': {'MRR': 0.3311, 'NDCG5': 0.4888, 'NDCG10': 0.5127, 'HR1': 0.253, 'HR5': 0.4161, 'HR10': 0.467, 'NUM': 2300}}
+2024-08-16 12:30:42
+Namespace(model_name='GCL4SR', data_name='ee2', data_dir='./datasets/ee2/', output_dir='output/', do_eval=False, no_cuda=False, gpu_id='3', lr=0.001, lr_dc=0.7, lr_dc_step=5, weight_decay=5e-05, adam_beta1=0.9, adam_beta2=0.999, num_hidden_layers=2, num_attention_heads=2, hidden_act='gelu', attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, epochs=200, batch_size=1024, max_seq_length=30, hidden_size=64, seed=2022, log_freq=1, patience=4, gnn_dropout_prob=0.5, use_renorm=True, use_scale=False, fast_run=True, sample_depth=2, sample_width=20, lam1=1, lam2=0.1, eval_size=100, cuda_condition=True, sample_size=[20, 20], data_file='./datasets/ee2/ee2.txt', x_domain_size=8368, item_size=19772, user_size=13714, log_file='output/GCL4SR-ee2-[20, 20].txt')
+2024-08-16 12:31:25
+Namespace(model_name='GCL4SR', data_name='ee2', data_dir='./datasets/ee2/', output_dir='output/', do_eval=True, no_cuda=False, gpu_id='3', lr=0.001, lr_dc=0.7, lr_dc_step=5, weight_decay=5e-05, adam_beta1=0.9, adam_beta2=0.999, num_hidden_layers=2, num_attention_heads=2, hidden_act='gelu', attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, epochs=200, batch_size=1024, max_seq_length=30, hidden_size=64, seed=2022, log_freq=1, patience=4, gnn_dropout_prob=0.5, use_renorm=True, use_scale=False, fast_run=True, sample_depth=2, sample_width=20, lam1=1, lam2=0.1, eval_size=100, cuda_condition=True, sample_size=[20, 20], data_file='./datasets/ee2/ee2.txt', x_domain_size=8368, item_size=19772, user_size=13714, log_file='output/GCL4SR-ee2-[20, 20].txt')
+{'Epoch': 0, 'X': {'MRR': 0.5184, 'NDCG5': 0.743, 'NDCG10': 0.7852, 'HR1': 0.4147, 'HR5': 0.5964, 'HR10': 0.6896, 'NUM': 4485}, 'Y': {'MRR': 0.538, 'NDCG5': 0.7935, 'NDCG10': 0.8592, 'HR1': 0.4248, 'HR5': 0.6713, 'HR10': 0.8104, 'NUM': 2300}}
+GCL4SR-ee2-[20, 20]
+{'Epoch': 0, 'X': {'MRR': 0.5184, 'NDCG5': 0.743, 'NDCG10': 0.7852, 'HR1': 0.4147, 'HR5': 0.5964, 'HR10': 0.6896, 'NUM': 4485}, 'Y': {'MRR': 0.538, 'NDCG5': 0.7935, 'NDCG10': 0.8592, 'HR1': 0.4248, 'HR5': 0.6713, 'HR10': 0.8104, 'NUM': 2300}}
+2024-08-16 13:41:27
+Namespace(model_name='GCL4SR', data_name='ee2', data_dir='./datasets/ee2/', output_dir='output/', do_eval=True, no_cuda=False, gpu_id='3', lr=0.001, lr_dc=0.7, lr_dc_step=5, weight_decay=5e-05, adam_beta1=0.9, adam_beta2=0.999, num_hidden_layers=2, num_attention_heads=2, hidden_act='gelu', attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, epochs=200, batch_size=1024, max_seq_length=30, hidden_size=64, seed=2022, log_freq=1, patience=4, gnn_dropout_prob=0.5, use_renorm=True, use_scale=False, fast_run=True, sample_depth=2, sample_width=20, lam1=1, lam2=0.1, eval_size=100, cuda_condition=True, sample_size=[20, 20], data_file='./datasets/ee2/ee2.txt', x_domain_size=8368, item_size=19772, user_size=13714, log_file='output/GCL4SR-ee2-[20, 20].txt')
+{'Epoch': 0, 'X': {'MRR': 0.5184, 'NDCG5': 0.515, 'NDCG10': 0.5443, 'HR1': 0.4147, 'HR5': 0.5964, 'HR10': 0.6896, 'NUM': 4485}, 'Y': {'MRR': 0.538, 'NDCG5': 0.55, 'NDCG10': 0.5956, 'HR1': 0.4248, 'HR5': 0.6713, 'HR10': 0.8104, 'NUM': 2300}}
+GCL4SR-ee2-[20, 20]
+{'Epoch': 0, 'X': {'MRR': 0.5184, 'NDCG5': 0.515, 'NDCG10': 0.5443, 'HR1': 0.4147, 'HR5': 0.5964, 'HR10': 0.6896, 'NUM': 4485}, 'Y': {'MRR': 0.538, 'NDCG5': 0.55, 'NDCG10': 0.5956, 'HR1': 0.4248, 'HR5': 0.6713, 'HR10': 0.8104, 'NUM': 2300}}
+2024-08-16 13:49:39
+Namespace(model_name='GCL4SR', data_name='ee2', data_dir='./datasets/ee2/', output_dir='output/', do_eval=True, no_cuda=False, gpu_id='3', lr=0.001, lr_dc=0.7, lr_dc_step=5, weight_decay=5e-05, adam_beta1=0.9, adam_beta2=0.999, num_hidden_layers=2, num_attention_heads=2, hidden_act='gelu', attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, epochs=200, batch_size=1024, max_seq_length=30, hidden_size=64, seed=2022, log_freq=1, patience=4, gnn_dropout_prob=0.5, use_renorm=True, use_scale=False, fast_run=True, sample_depth=2, sample_width=20, lam1=1, lam2=0.1, eval_size=1000, cuda_condition=True, sample_size=[20, 20], data_file='./datasets/ee2/ee2.txt', x_domain_size=8368, item_size=19772, user_size=13714, log_file='output/GCL4SR-ee2-[20, 20].txt')
+{'Epoch': 0, 'X': {'MRR': 0.2936, 'NDCG5': 0.3037, 'NDCG10': 0.3289, 'HR1': 0.2004, 'HR5': 0.3953, 'HR10': 0.4734, 'NUM': 4485}, 'Y': {'MRR': 0.3231, 'NDCG5': 0.3303, 'NDCG10': 0.3492, 'HR1': 0.2383, 'HR5': 0.4087, 'HR10': 0.4661, 'NUM': 2300}}
+GCL4SR-ee2-[20, 20]
+{'Epoch': 0, 'X': {'MRR': 0.2936, 'NDCG5': 0.3037, 'NDCG10': 0.3289, 'HR1': 0.2004, 'HR5': 0.3953, 'HR10': 0.4734, 'NUM': 4485}, 'Y': {'MRR': 0.3231, 'NDCG5': 0.3303, 'NDCG10': 0.3492, 'HR1': 0.2383, 'HR5': 0.4087, 'HR10': 0.4661, 'NUM': 2300}}
+2024-08-16 14:33:47
+Namespace(model_name='GCL4SR', data_name='ee2', data_dir='./datasets/ee2/', output_dir='output/', do_eval=True, no_cuda=False, gpu_id='3', lr=0.001, lr_dc=0.7, lr_dc_step=5, weight_decay=5e-05, adam_beta1=0.9, adam_beta2=0.999, num_hidden_layers=2, num_attention_heads=2, hidden_act='gelu', attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, epochs=200, batch_size=1024, max_seq_length=30, hidden_size=64, seed=2022, log_freq=1, patience=4, gnn_dropout_prob=0.5, use_renorm=True, use_scale=False, fast_run=True, sample_depth=2, sample_width=20, lam1=1, lam2=0.1, eval_size=200, cuda_condition=True, sample_size=[20, 20], data_file='./datasets/ee2/ee2.txt', x_domain_size=8368, item_size=19772, user_size=13714, log_file='output/GCL4SR-ee2-[20, 20].txt')
+{'Epoch': 0, 'X': {'MRR': 0.4494, 'NDCG5': 0.4583, 'NDCG10': 0.4746, 'HR1': 0.3483, 'HR5': 0.5509, 'HR10': 0.6007, 'NUM': 4485}, 'Y': {'MRR': 0.4661, 'NDCG5': 0.4584, 'NDCG10': 0.5084, 'HR1': 0.3709, 'HR5': 0.5357, 'HR10': 0.6922, 'NUM': 2300}}
+GCL4SR-ee2-[20, 20]
+{'Epoch': 0, 'X': {'MRR': 0.4494, 'NDCG5': 0.4583, 'NDCG10': 0.4746, 'HR1': 0.3483, 'HR5': 0.5509, 'HR10': 0.6007, 'NUM': 4485}, 'Y': {'MRR': 0.4661, 'NDCG5': 0.4584, 'NDCG10': 0.5084, 'HR1': 0.3709, 'HR5': 0.5357, 'HR10': 0.6922, 'NUM': 2300}}

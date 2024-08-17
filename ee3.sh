@@ -1,0 +1,1 @@
+python runner.py --data_name='ee2' --gpu_id 3 --data_dir='./datasets/ee2/' --batch_size=1024 --patience=4 --eval_size=1000 --max_seq_length=50 --hidden_size=128 --lr=1e-4GCL4SR/GCL4CDSR/ee3.sh
